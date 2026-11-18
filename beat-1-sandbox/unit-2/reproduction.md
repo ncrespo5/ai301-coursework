@@ -59,33 +59,32 @@ This run covered the SkillExtractor test file. I’ll rerun these five cases aga
 
 ## Eval iterations
 
-Answer all four sections. Quote source text directly; paraphrase does not satisfy these
-fields.
-
 **Run history**
 
-[The agreement score of each run you did, in order. A single run is a complete answer if
-only one run occurred. **The last score in your list must match the agreement line in the
-`eval-run.txt` you committed** — that file is the record of your final run.]
+1. `agreement: 17/20 scored items  (bar: 18/20: below the bar)`
+2. `agreement: 20/20 scored items  (bar: 18/20: PASS)`
 
 **Package analysis**
 
-[Pick one scored package (`pkg-01` through `pkg-20` — the four `calib-` packages are never
-scored). Name it by id, say what your rubric decided and what the gold label said, and
-explain why your rubric read it that way.]
+**pkg-09** received **accept** in the final run, matching the gold label. The first run rejected it because the reporter could not establish that the second command hit the size limit first. The revised check accepted the bounded cannot-reproduce report because it exercised the same batch operation, recorded the observed output, and identified the suspected input condition it had not reached.
+
+> Same operation (two --exec-batch commands hitting the size limit) exercised with log output shown; suspected untriggered condition named (per-file length variation / lower forced limit).
 
 **Check rationale**
 
-[Quote one check from the `rubric.md` you uploaded to `tools/repro-check/`, exactly as it reads now.
-Then say why it reads that way — what you revised to get there, or what you rejected in
-favour of it.]
+**Proof matches the issue**
+
+> A positive reproduction needs an observable result matching the reported failure. For an honest cannot-reproduce report, pass if the same operation was actually exercised, there is observable output, and the reporter identifies any suspected trigger condition their environment or input did not reach. A different operation, a setup failure that prevented the attempt, or no diagnostic result fails.
+
+The first formulation treated an unconfirmed trigger condition as evidence that the report tested the wrong thing. The revised check can accept a report that exercised the right operation, captured what happened, and identified a specific gap in the tested conditions. A positive reproduction still needs an observable result matching the reported failure.
 
 **Trade-offs**
 
-[Every check gives something up. Any one of these is a complete answer: a package whose
-result it changes, a canary you re-ran with `--only`, a case you accept it will miss, or a
-stated reason nothing changed elsewhere. "Nothing changed, and here is how I know" earns
-the point in full when the reason follows.]
+The revised check can accept a report that provides useful evidence about the observed environment even when the bug remains unverified there. That means the accepted report may still need a follow-up run under the original trigger conditions. In **pkg-09**, the first run recorded this limitation:
+
+> Trigger (second command hitting the size limit first) never achieved: 'my padding approach may not achieve that' and 'did not find a knob to force a smaller limit'; the 'three batches' claim is also inconsistent with ~23 MB vs 2 MiB.
+
+The second run accepted the report because that limitation was stated and the recorded batch output supported its narrower conclusion.
 
 ---
 

@@ -1,44 +1,42 @@
 # Voice guide: how I talk upstream
 
-<!--
-THIS IS THE PART YOU WRITE (new this week). Live mode reads this file
-before any comment of yours goes out the door; eval mode ignores it
-entirely, because your voice is yours and carries no gold labels.
-
-This is not etiquette. "Be polite and concise" is advice for everyone
-and therefore rules for no one. Write rules YOU need, in your own
-words, each one concrete enough that the skill can hold a draft
-against it and say which rule it breaks.
-
-Three sections. Fill all three.
--->
-
 ## Who I am in threads
 
-<!-- 2-3 lines. Who is talking when you comment on an issue: your
-experience level stated plainly, what you are doing in this repo, what
-readers can expect from you. This is the register your rules protect. -->
+I’m a computer science student contributing to PathReview through CodePath. I like to understand what’s causing a bug before deciding how to fix it. In an issue thread, I want people to know what I tried, what happened, and what I’m checking next.
 
 ## Rules I write by
 
-<!-- 3-5 rules, drafted from the lecture's slide-12 moment. Each rule
-needs a wrong/right pair from your own hand: one line you might
-actually have written that breaks the rule, and the line you would
-post instead. The pair is what makes a rule executable; a rule without
-one is a wish.
+### Rule: Say what I’m taking on.
 
-Format each rule like this:
+Name the issue and the first thing I’ll investigate.
 
-### Rule: <short name>
+- Wrong: "I’ll fix the parser."
+- Right: "I’d like to work on #55. I’ll start with the five SkillExtractor cases that fail on the original code."
 
-<The rule, one or two sentences.>
+### Rule: Give the result and the setup.
 
-- Wrong: "<a line that breaks it>"
-- Right: "<the line to post instead>"
--->
+Include enough detail for someone else to check my result.
+
+- Wrong: "I reproduced it. The tests failed.”
+- Right: “On macOS arm64 with Python 3.12.1, the original SkillExtractor suite reported 13 passes and 5 expected failures.”
+
+### Rule: Label a hunch as a hunch.
+
+Say what I suspect and how I’ll check it.
+
+- Wrong: “The regex is definitely the reason TypeScript is missing.”
+- Right: “The exported interface case fails. I suspect the detector is missing that declaration pattern, so I’ll trace which signals it checks.”
+
+### Rule: Commit to the next step.
+
+Give a concrete action I can follow through on.
+
+- Wrong: “I’ll have the whole fix ready tonight.”
+- Right: "I’ll verify the change against the five failing cases and share the results.”
 
 ## Things I never post
 
-<!-- A short list. Promises you cannot keep, tones you refuse,
-shortcuts you know you reach for when tired. The skill quotes this
-list back at you when a draft crosses it. -->
+- A deadline I haven’t scoped.
+- “All tests pass” when I ran only the focused test file.
+- A guess about the cause stated as a confirmed finding.
+- A reproduction claim without the command I ran or the result I saw.
