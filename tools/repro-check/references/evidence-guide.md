@@ -8,12 +8,12 @@
 ## Steps
 
 - Read the setup and action sequence in the repro report. If it refers to a recipe, find the exact steps in the issue context or the linked issue section. Check that the package identifies any variations.
-- A stranger should be able to locate inputs or fixtures, set up the relevant state, and take the action that triggers the result. Count missing prerequisites rather than the number of lines.
+- A stranger should be able to locate inputs or fixtures, set up the relevant state, and take the action that triggers the result. Judge whether a missing detail could alter the bug being checked. A fixture can be described by the properties that trigger the behavior when its exact content does not matter.
 
 ## Behavior shown
 
 - Find command output, logs, screenshots, concrete observations, or assertion evidence under the repro report and compare them to the issue body, expected behavior, and exact trigger.
-- A passing or failing command is only diagnostic if the report ties it to the disputed behavior. A well-evidenced attempt where the bug does not occur can count. An unrelated error or a command that never reached the trigger cannot establish either result.
+- A passing or failing command is only diagnostic if the report ties it to the disputed behavior. A well-evidenced attempt where the bug does not occur can count, even with a documented gap in a suspected triggering condition, if the report still ran the target operation. An unrelated error or a command that never reached the trigger cannot establish either result.
 
 ## Honesty
 
