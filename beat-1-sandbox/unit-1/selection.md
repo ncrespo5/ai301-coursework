@@ -15,22 +15,42 @@ wrong label is not graded.
 
 **Issue link**
 
-[The individual Path Review issue page. A link to the repository or the issue list
-does not satisfy this field.]
+https://github.com/codepath/pathreview-ai301-fa26-howard/issues/55
 
 **Verdict output**
 
-[Your skill's live-mode output for this issue, pasted verbatim and ending with the
-fenced JSON verdict block. A summary does not satisfy this field.]
+**Verdict: accept.** Issue #55 ("Skill extractor fails to detect JavaScript and TypeScript") passes all four required checks and the preferred one.
 
-**The verdict must record `accept` for this issue.** Choose an issue your own skill
-accepts. If your skill rejects every candidate you try, that is a signal about your
-rubric rather than about the issues: revise it and re-run — retries are unlimited and a
-partial re-run costs about $0.20 — or run the skill on different candidates. Output
-recording `reject` for the issue you chose earns no credit for this field.
+Scope check: the issue is in `codepath/pathreview-ai301-fa26-howard`, the scoped repo. Under the Path Review house rule, classmates' claim comments don't block it. There are none anyway.
 
-```
-paste the output here, including the closing JSON block
+| Check | Weight | Grade | Evidence |
+|---|---|---|---|
+| Bounded change | required | pass | The fix is detection logic in `ingestion/parsers/skill_extractor.py` (`_detect_languages`, `_detect_tools`, `_detect_databases`). It is verified by five existing `xfail` tests via `pytest tests/unit/test_skill_extractor.py -q`. It carries `bug`, `ingestion` and `tier-1` labels. |
+| No duplicate work | required | pass | No assignees, nothing in the Development panel and no comments. None of the 23 open PRs touches `skill_extractor`. The closest, #85, is a tech detector fix for issue 57, a different issue. |
+| Repository open to contributions | required | pass | No archive notice and no closure notice. The newest commit is Sep 16, 2026 and the newest PR is #97, opened Nov 16, 2026, both within 12 months. No release exists, which isn't evidence of inactivity. |
+| Contribution policy | required | pass | `docs/CONTRIBUTING.md` says nothing about AI. It requires tests, `make check && make test-unit`, the PR template, `<type>/<issue-number>-<desc>` branch names and Conventional Commits. I couldn't read the PR template's text, so I can't rule out an AI-disclosure checkbox. Disclosure wouldn't be a ban anyway. |
+| Recent activity | preferred | pass | Human-authored commits on Sep 16, 2026, which is about 62 days before today (Nov 17, 2026). I saw no maintainer reply on the issue. |
+
+**Fit:** it matches your profile closely. It's a Python parser bug about JavaScript and TypeScript detection, in one file, verified by focused tests.
+
+**Notes for the PR:**
+- Per `docs/CONTRIBUTING.md`, remove the `xfail(strict=True)` markers when the tests pass. Otherwise CI fails with `XPASS(strict)`.
+- Remove any matching `pyproject.toml` suppressions for the seeded bugs.
+- Don't run `ruff --fix --unsafe-fixes`.
+- Two of the five tests, the devops and docker-compose ones, concern `_detect_tools` rather than JS/TS. You could do the JS/TS pair first, but the issue as written covers all five.
+
+```json
+{
+  "item": "https://github.com/codepath/pathreview-ai301-fa26-howard/issues/55",
+  "checks": [
+    {"name": "Bounded change", "grade": "pass", "evidence": "Detection fixes in one file (ingestion/parsers/skill_extractor.py: _detect_languages/_detect_tools/_detect_databases), verified by five existing xfail tests via pytest tests/unit/test_skill_extractor.py -q; labeled bug, ingestion, tier-1."},
+    {"name": "No duplicate work", "grade": "pass", "evidence": "Assignees: None; Development: none; zero comments; none of the 23 open PRs touches skill_extractor (#85 is for issue 57, a different issue)."},
+    {"name": "Repository open to contributions", "grade": "pass", "evidence": "No archive or closure notice; latest commits Sep 16, 2026 and newest PR #97 opened Nov 16, 2026, both within 12 months of today (2026-11-17)."},
+    {"name": "Contribution policy", "grade": "pass", "evidence": "docs/CONTRIBUTING.md has no AI/LLM restriction or disclosure rule; requires tests, make check && make test-unit, PR template, removal of xfail markers. PR template text not read."},
+    {"name": "Recent activity", "grade": "pass", "evidence": "Human-authored commits on Sep 16, 2026 (about 62 days before today); no maintainer reply seen on the issue."}
+  ],
+  "verdict": "accept"
+}
 ```
 
 ---
