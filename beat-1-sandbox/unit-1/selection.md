@@ -37,31 +37,37 @@ paste the output here, including the closing JSON block
 
 ## Eval iterations
 
-Quote source text directly in each field below. Paraphrase does not satisfy them.
-
 **Run history**
 
-[The agreement score of each run you did, in order. A single run is a complete answer if
-only one run occurred. **The last score in your list must match the agreement line in the
-`eval-run.txt` you committed** — that file is the record of your final run.]
+1. `agreement: 14/20 scored items  (bar: 18/20: below the bar)`
+2. `agreement: 18/20 scored items  (bar: 18/20: PASS)`
 
 **Issue analysis**
 
-[One scored issue, identified by id (`issue-01` through `issue-20`; the `calib-`
-issues are not scored). State your rubric's decision, the gold label, and the
-reasoning that produced your rubric's result.]
+**issue-02** changed from accept to reject, matching the gold label of reject. The required repository check failed on this evidence from the second run:
+
+> Last push 2024-06-19, release 2023-12-09 and last commit 2023-12-09 are all over 12 months before the 2026-08-05 capture; all 5 sampled issues show 'no maintainer comment in thread'.
+
+The original rubric accepted the bounded fix because the repo was unarchived and the recent-activity check was a preference. The revised rubric rejects the combination of old repository activity and no maintainer response.
 
 **Check rationale**
 
-[One check from the `rubric.md` uploaded to `tools/issue-select/`, quoted as it is
-currently written, with the reasoning behind its current form.]
+The **Repository open to contributions** check reads:
+
+> Fail if archived, read-only, or explicitly closed to contributions. Also fail if there is direct evidence of prolonged inactivity: all available push, release, and commit dates are older than 12 months, and the reviewed threads and response sample show no maintainer intervention within that period. Pass for an unarchived repo without a closure notice when there is evidence of a push, commit, release, or maintainer response within 12 months. A missing release record by itself is not evidence of inactivity.
+
+The check gives an older but maintained project a path to pass while filtering out a project with sustained inactivity. The separate 90-day preference still ranks candidates without excluding every quiet repository.
 
 **Trade-offs**
 
-[What the quoted check gives up. Any one of these is a complete answer: an issue whose
-result it changes, a canary you re-ran with `--only`, a case you accept it will miss, or a
-stated reason nothing changed elsewhere. "Nothing changed, and here is how I know" earns
-the point in full when the reason follows.]
+The inactivity rule can reject a mature project that still quietly accepts patches when GitHub shows no recent activity or replies. The scope rule also rejected two gold-accept cases in the passing run:
+
+```text
+issue-04  accept  reject   NO     failed: Bounded change
+issue-19  accept  reject   NO     failed: Bounded change
+```
+
+One description left its list of fixes open-ended, and the other proposed several possible changes across UI and concurrency. Requiring a bounded change makes the rubric more cautious in those cases.
 
 ---
 
