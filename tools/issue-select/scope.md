@@ -36,4 +36,4 @@ you want to avoid. The skill uses this only to RANK the issues your
 rubric accepts, never to change a verdict: fit cannot rescue an issue
 your rubric rejects, and cannot sink one it accepts. -->
 
-(Write a few sentences here.)
+I want to work on a small to medium Python parser bug, especially one involving JavaScript or TypeScript detection. I’ve worked with Python, JavaScript, and TypeScript, and I want to use that experience to trace a parsing bug and verify the fix with focused tests. Given my time limit, I’d avoid changes that span several components or duplicate work already in an open pull request.

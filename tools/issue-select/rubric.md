@@ -1,44 +1,15 @@
 # Rubric: is this a good first issue?
 
-<!--
-THIS IS THE PART YOU WRITE. The skill in SKILL.md executes whatever checks
-you define here. It ships empty on purpose: the judgment is your work.
-
-A filled rubric must contain:
-
-1. At least one row in the checks table. Each row needs all four columns:
-   - Check: a short name (used in the output JSON).
-   - Evidence: exactly what to look at, and where. Name the source
-     (repo-facts block, issue body, comment thread, or the locations in
-     references/evidence-guide.md). "The repo" is not a source; "the last
-     5 default-branch commit dates" is.
-   - Pass condition: a condition someone else could apply and get your
-     answer. Prefer thresholds with numbers ("a maintainer commented
-     within 30 days") over adjectives ("maintainer is responsive").
-   - Weight: `required` (a fail here rejects the issue) or `preferred`
-     (never changes the verdict; a nice-to-have that helps rank the
-     issues you accept).
-
-2. A verdict rule below the table: how the check grades combine into
-   accept or reject, including how `unclear` is treated. The verdict
-   space is binary. If you write no rule for `unclear`, the skill treats
-   it as fail.
-
-Cover what actually kills first contributions. The lecture named four
-families: the maintainer is alive, the repo is in use, the scope fits a
-newcomer, and nobody else is already on it. A rubric that ignores a family
-will fail eval issues designed around that family.
--->
-
 ## Checks
 
 | Check | Evidence | Pass condition | Weight |
 |---|---|---|---|
-|  |  |  |  |
+| Bounded change | Issue body, linked files, and maintainer comments that define expected behavior or expand the scope. | Pass when the issue has one clear goal and the change is plausibly limited to one component and at most three implementation files, plus its tests and documentation. Fail for umbrella issues, cross-component rewrites, unresolved design decisions, or support questions with no code or documentation change to make. | required |
+| No duplicate work | Issue Development panel and comments, linked PR state and scope, and Assignees panel. | Pass after checking those sources and finding no open PR that implements the same change or other clear evidence of active ownership. Fail if there is an open PR for the same change, or a maintainer has assigned or confirmed another contributor is actively implementing it. Apply the Path Review house rule in live mode to classmates’ claim comments. A closed PR without a current owner or replacement does not by itself block the issue. | required |
+| Repository open to contributions | Archived flag and any maintainer notice that the repository is read-only or no longer accepts contributions. | Pass if the repository is unarchived and has no notice closing contributions. Fail if it is archived, read-only, or explicitly closed to contributions. | required |
+| Contribution policy | Contribution policy in the snapshot, or live contributor docs, AI policy, and PR template. | Pass if the published policy allows the planned workflow or the checked sources are silent. Disclosure, testing, and human-review requirements are acceptable if they can be followed. Fail if the policy explicitly rules out the planned AI-assisted workflow. | required |
+| Recent activity | Last five default-branch commits and maintainer replies on the issue or in the repo-facts response sample. Use the snapshot date in eval mode and today in live mode. | Pass if there is a human-authored or human-merged commit or a maintainer reply within 90 days. Fail if the dates are known and all are older. | preferred |
 
 ## Verdict rule
 
-<!-- State how the grades above combine into accept or reject, and how
-unclear is treated. Example shape (write your own): "accept if every
-required check passes; preferred checks never change the verdict, they
-rank accepted issues; unclear counts as fail." -->
+Accept when every required check passes. Reject if a required check fails or remains unclear after checking its evidence. A preferred check only helps rank accepted issues. Old or unclear activity alone does not rule out a contribution.
