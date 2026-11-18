@@ -15,8 +15,49 @@ label is not graded.
 
 **Pull request**
 
-[Link to the pull request you opened. It must be the pull request's own page on the Path
-Review repo, not your fork's branch page.]
+https://github.com/codepath/pathreview-ai301-fa26-howard/pull/98
+
+**PR precheck verdict**
+
+The first live precheck returned `reject` because the draft changed existing database display labels. The branch now preserves those labels, and the PostgreSQL fixture checks the exact label and one result when both a direct reference and an alias are present. The revised draft returned `accept` with all five required checks passing.
+
+```json
+{
+  "item": "codepath/pathreview-ai301-fa26-howard#55 <- ncrespo5:fix/55-skill-extractor-detection (fa9bd21)",
+  "checks": [
+    {
+      "name": "Plan fidelity",
+      "grade": "pass",
+      "evidence": "Diff updates the language, database and tool detectors and removes the five xfail markers as planned; the extra name/suffix signals and stronger PostgreSQL test are listed in the PR's Changes section."
+    },
+    {
+      "name": "Reproduction proof",
+      "grade": "pass",
+      "evidence": "Same --runxfail command: pytest-before.txt '5 failed, 13 passed' on 99673c7 vs pytest-after-runxfail.txt '18 passed' on fa9bd21; normal run also '18 passed'."
+    },
+    {
+      "name": "Repository verification",
+      "grade": "pass",
+      "evidence": "Local versions of all five CI jobs reported (lint/Black pass, mypy 76 files clean, 380 passed/48 xfailed, integration exit 5 per workflow shim, frontend 18 passed); hosted CI is honestly marked as pending until the PR is opened, which CONTRIBUTING allows."
+    },
+    {
+      "name": "Reviewable diff",
+      "grade": "pass",
+      "evidence": "Only ingestion/parsers/skill_extractor.py and tests/unit/test_skill_extractor.py changed; no debug output, dead code or unrelated churn."
+    },
+    {
+      "name": "Project standards",
+      "grade": "pass",
+      "evidence": "All template sections filled with 'Closes #55', conventional fix(ingestion) commits, xfail markers removed, and the required Unit 8 AI-use disclosure is in Notes for Reviewers."
+    }
+  ],
+  "verdict": "accept"
+}
+```
+
+**GitHub Actions**
+
+https://github.com/codepath/pathreview-ai301-fa26-howard/actions/runs/44296758197
 
 **Branch**
 
