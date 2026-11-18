@@ -99,12 +99,11 @@ This is also the basis for the claim comment you write in Unit 2.
 
 **Selection rationale**
 
-[Answer all three:
+I picked issue #55 because I wasn’t familiar with how a Python parser detects JavaScript and TypeScript. That made it interesting to me because I’d get to learn how it works. The fix was focused enough that I felt I could spend time getting familiar with the code and still finish within the time I had.
 
-1. The issue's fit to your interests and to the time available.
-2. What the verdict identified correctly, and what you weighed that the rubric could
-   not.
-3. The anticipated difficulty in claiming it.]
+The `accept` verdict correctly identified that the issue had a clear scope and no visible competing pull request. I also weighed how much I could learn from working in an unfamiliar part of the codebase and whether I had enough time for that learning curve.
+
+I expected claiming the issue to be straightforward because it appeared unassigned and I didn’t see an open PR for it. I expected the learning curve to come after claiming it, when I started tracing how the parser detects each language and figuring out how to test the fix.
 
 ---
 
