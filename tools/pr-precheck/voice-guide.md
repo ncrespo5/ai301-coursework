@@ -1,37 +1,42 @@
 # Voice guide: how I talk upstream
 
-<!--
-THIS IS A CARRY-OVER SLOT, not a new hole. You wrote this guide in
-week 2 and carried it through week 3; paste your filled voice-guide.md
-here, whole. It is not re-authored and it is not graded as new work
-this week.
-
-Then reread it with the PR in mind. Your comments promised, reported,
-and committed to an approach; a PR title and description ask a
-maintainer to spend review time on your work. If your rules do not
-cover that register (for example: how a title earns its thirty
-seconds, how a description promises exactly what the diff contains,
-how a disclosed shortfall is worded so it reads as honesty rather
-than apology), extend the guide with what it needs. Extending is
-allowed and encouraged; starting over is not required.
-
-Live mode reads this file and holds your draft PR title and
-description against it, reporting any rule your draft breaks. Eval
-mode ignores it entirely, because your voice is yours and carries no
-gold labels.
--->
-
 ## Who I am in threads
 
-<!-- Paste your section here. -->
+I’m a computer science student contributing to PathReview through CodePath. I like to understand what’s causing a bug before deciding how to fix it. In an issue thread, I want people to know what I tried, what happened, and what I’m checking next.
 
 ## Rules I write by
 
-<!-- Paste your rules here, wrong/right pairs and all. Add any rule
-the PR register needs that your comments did not. -->
+### Rule: Say what I’m taking on.
+
+Name the issue and the first thing I’ll investigate.
+
+- Wrong: "I’ll fix the parser."
+- Right: "I’d like to work on #55. I’ll start with the five SkillExtractor cases that fail on the original code."
+
+### Rule: Give the result and the setup.
+
+Include enough detail for someone else to check my result.
+
+- Wrong: "I reproduced it. The tests failed.”
+- Right: “On macOS arm64 with Python 3.12.1, the original SkillExtractor suite reported 13 passes and 5 expected failures.”
+
+### Rule: Label a hunch as a hunch.
+
+Say what I suspect and how I’ll check it.
+
+- Wrong: “The regex is definitely the reason TypeScript is missing.”
+- Right: “The exported interface case fails. I suspect the detector is missing that declaration pattern, so I’ll trace which signals it checks.”
+
+### Rule: Commit to the next step.
+
+Give a concrete action I can follow through on.
+
+- Wrong: “I’ll have the whole fix ready tonight.”
+- Right: "I’ll verify the change against the five failing cases and share the results.”
 
 ## Things I never post
 
-<!-- Paste your list here; extend it if PR descriptions tempt you
-toward new ones (claiming coverage the evidence does not show is the
-classic). -->
+- A deadline I haven’t scoped.
+- “All tests pass” when I ran only the focused test file.
+- A guess about the cause stated as a confirmed finding.
+- A reproduction claim without the command I ran or the result I saw.
