@@ -184,16 +184,15 @@ Local verification hit three setup blockers. The bootstrap script split the chec
 
 **Technical Skills Gained**
 
-[What you learned technically, named concretely.]
+I learned how Bootstrap’s collapse events keep the individual buttons in sync, including their labels and `aria-expanded` state.
 
 **Challenges Overcome**
 
-[What was hard and how you solved it; point at the real events, the
-Toolkit blocks above are full of them.]
+The hardest part was getting a local packet that actually exercised the feature. The default sample section had no nested categories.
 
 **What I'd Do Differently Next Time**
 
-[Reflection on your process.]
+Next time, I’d check the seeded data and account permissions before spending time debugging the page.
 
 ---
 
