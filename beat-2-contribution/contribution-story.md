@@ -89,9 +89,9 @@ you it held up. **Record the link to your claim comment in this section too.**
 Not claimed yet? Write `claim pending` and today's date where the link goes,
 and add the link the moment your claim lands.]
 
-**Claim:** claim pending (November 18, 2026).
+**Claim:** https://github.com/WorldconVotingSystems/nomnom/issues/358#issuecomment-6997163269
 
-NomNom #358 appeared in CodePath’s saved HTML/UI issue list. It proposes two controls on one existing page. The issue was open and unassigned, with no comments, no linked PR in its timeline, and no matching open PR in the repository. The repository is active and its developer guide describes a pull-request contribution workflow.
+NomNom #358 appeared in CodePath’s saved HTML/UI issue list. It proposes two controls on one existing page. At selection time the issue was open and unassigned, with no prior comments, no linked PR in its timeline, and no matching open PR in the repository. The repository is active and its developer guide describes a pull-request contribution workflow.
 
 **Toolkit**
 
@@ -161,19 +161,17 @@ Source baseline inspected on macOS arm64 at [upstream commit `22d531f`](https://
 
 **Analysis**
 
-[Your analysis of the root cause: what is causing the issue, traced
-to the files and functions involved.]
+The packet page renders one Bootstrap collapse group per category with finalist downloads. Each category has an associated button, and the page’s `shown.bs.collapse` and `hidden.bs.collapse` handlers update that button’s text and styling. The page had no way to show or hide all of those groups together.
 
 **Proposed Solution**
 
-[High-level description of your fix approach, and what you are
-deliberately NOT changing.]
+Add two packet-level buttons that use Bootstrap’s existing collapse instances. Target finalist groups and preserve individual category toggles and always-visible packet downloads.
 
 **Implementation Plan**
 
-1. [Modify file X to do Y]
-2. [Add or change Z]
-3. [Update tests]
+1. Add **Expand All** and **Collapse All** above the categories in the packet index template.
+2. Call Bootstrap’s `show()` and `hide()` methods on finalist groups. Show the controls only when at least one group and Bootstrap are available.
+3. Verify the controls with two sample categories and check the existing category labels and ARIA state.
 
 [Record deviations here as they happen: what changed mid-build and
 why. A recorded deviation is honest work; silent drift is not.]
@@ -189,10 +187,7 @@ why. A recorded deviation is honest work; silent drift is not.]
 
 ## Testing Strategy
 
-[What observable checks prove the fix: your reproduction steps re-run
-against the built change (before and after), and the repo's own test
-suite or checks with the outcome shown. "Tests pass" with nothing
-observable named is not a strategy.]
+At baseline `22d531f`, source inspection found a collapse button per category and no page-level controls. A local Node and jsdom fixture loaded the changed template’s actual script and Bootstrap 5.3.3. With two categories, it verified **Expand All** from a mixed state, **Collapse All**, individual toggles, and synchronization of button labels and `aria-expanded`. An unrelated collapse stayed open, and the bulk controls stayed hidden when categories or Bootstrap were absent. The full Django stack with seeded packet data and the repository test suite are pending.
 
 **Toolkit**
 
@@ -208,13 +203,9 @@ observable named is not a strategy.]
 [A running log, added to as you work. Date each entry. What you
 built, decisions you made when you made them, wrong turns included.]
 
-**[Date]**
+**November 18, 2026**
 
-[Entry]
-
-**[Date]**
-
-[Entry]
+Claimed NomNom #358 in its GitHub thread. The local branch `fix/358-packet-category-controls` contains the one-template change in commit `507fdd3`. The fixture confirmed that each category’s existing Bootstrap events still update its individual button. The branch is local and a pull request is pending.
 
 **Toolkit**
 
