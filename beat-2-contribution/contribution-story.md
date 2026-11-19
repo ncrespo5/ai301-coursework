@@ -134,24 +134,19 @@ Local discovery in `_load_local_runs` handles JUnit XML and Cucumber JSON. The c
 
 **Environment Setup**
 
-[What a stranger would need to stand this up: your operating system,
-the relevant versions (language, runtime, package manager, the project
-itself), and how you set the project up. Then the challenges you faced
-and how you solved them, or that none came up.]
+TestLedger 0.1.0 at [baseline commit `83776f8`](https://github.com/surkuar/testledger/commit/83776f815ed5aa618b26a411331c461e65c25e44), on macOS arm64 with Python 3.12.1 and pytest 9.2.0. Set up an isolated environment with `python3 -m venv .venv` and `.venv/bin/python -m pip install -e '.[dev]'`.
 
 **Steps to Reproduce**
 
-1. [Step 1]
-2. [Step 2]
-3. [Observed result]
+1. Put two `*-result.json` fixtures in `reports/20261118-abcdef1-attempt1/allure-results/`. Use the same `historyId` and `fullName` in both. Set the first status to `failed` and the later status to `passed`.
+2. Call `_load_local_runs(Config(), root)` with the directory containing `reports/` as `root`.
+3. Observed two input files and zero imported runs. No fail-to-pass sequence reached the ledger.
 
 **Reproduction Evidence**
 
-- **Commit showing reproduction:** [link to commit in your fork]
-- **Screenshots/logs:** [if applicable]
-- **My findings:** [what you discovered during reproduction; an
-  honest, evidenced cannot-reproduce that led you to re-pick or ask
-  the maintainer belongs here and costs you nothing]
+- **Commit showing reproduction:** Fork commit pending. Reproduced against upstream `83776f8`.
+- **Screenshots/logs:** `Input files: 2`, `Local runs: 0`, `Observed: []`. The unchanged full suite initially reported 46 passes and one failure in `test_custom_fix_pattern_replaces_default`. An immediate repeat reported 47 passes. The existing ingest suite separately passed all three tests. Ruff lint and format checks passed.
+- **My findings:** The fixture reaches the existing local-discovery code path, which returned no runs for the Allure directory. This is the before result for checking the importer later.
 
 **Toolkit**
 
