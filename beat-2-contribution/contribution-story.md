@@ -14,21 +14,17 @@
 
 November 18, 2026. The issue-scout setup carries forward the issue-selection rubric and adds searches for small Python parser and CLI work. An exploratory GitHub scan surfaced issues with no listed assignee, but their threads showed existing claims or a competing pull request. The revised search strategy prioritizes zero-comment results, and the rubric still checks the thread and open pull requests before an issue is selected. When the project shifted to frontend work, CodePath’s saved HTML/UI issue list supplied the candidates. The direct rubric review checked NomNom #358 against the issue timeline and open pull requests.
 
-**Unit 6: [one line on the tool work]**
+**Unit 6: Repro-check and voice guide**
 
-[2-4 sentences: the voice-guard, the repo-memory file. What broke or
-fell short, and what changed because of it. "Nothing broke" counts when
-it is true - say how you know.]
+November 18, 2026. In the PathReview sandbox, the repro-check and voice guide helped prepare the claim and reproduction comments for #55. The first evaluation matched 17 of 20 cases. The rubric was revised to accept a bounded cannot-reproduce report when it tested the same operation, captured observable output, and named the trigger it did not reach. The revised run matched 20 of 20. [Reproduction and eval notes](../beat-1-sandbox/unit-2/reproduction.md)
 
-**Unit 7: [one line on the tool work]**
+**Unit 7: Plan-check and implementation evidence**
 
-[2-4 sentences: the ship-gate and your gate manifest. What it produced
-on your real branch, what fought you, what changed because of it.]
+November 18, 2026. The PathReview plan-check matched 18 of 20 evaluation cases. One clear plan was rejected because it stated a possible cause too confidently, which showed the value of pairing an explicitly labeled hypothesis with a trace step. The final live plan passed all seven checks after the deviations were documented, and the posted plan and branch both point back to the five failing fixtures. [Plan and branch evidence](../beat-1-sandbox/unit-3/plan-and-implement.md)
 
-**Unit 8: [one line on the tool work]**
+**Unit 8: PR precheck and draft revision**
 
-[2-4 sentences: the PR-monitor and your playbook. What it read, what it
-drafted, what you did with the draft.]
+November 18, 2026. The first live precheck of the PathReview #55 PR draft flagged a change to existing database display labels. The patch restored those labels and added a PostgreSQL assertion covering both the exact label and deduplication. The revised draft passed all five required checks and was used for PathReview PR #98. [PR and precheck evidence](../beat-1-sandbox/unit-4/pull-request.md)
 
 ---
 
@@ -38,13 +34,14 @@ drafted, what you did with the draft.]
 
 NomNom #358 appeared in CodePath’s saved HTML/UI issue list. It proposes two controls on one existing page. At selection time the issue was open and unassigned, with no prior comments, no linked PR in its timeline, and no matching open PR in the repository. The repository is active and its developer guide describes a pull-request contribution workflow.
 
+I chose NomNom #358 because it was a focused frontend change I could test in the browser. I liked that the improvement was easy to see. If someone wants to browse several categories, they can open them together instead of clicking through each one.
+
 **Toolkit**
 
-- Tool: issue-scout (your scout: your search strategy, your rubric),
-  and how you used it
-- What it produced: [the scan and its verdict on this issue, described]
-- Difficulties: [where it fell short, or "none met" if none did]
-- What changed: [what you patched or would update, or "nothing"]
+- Tool: Issue-selection rubric, CodePath’s issue selector, and GitHub issue and PR searches.
+- What it produced: A shortlist and a manual decision to proceed with #358 after checking scope, ownership, and competing PRs.
+- Difficulties: Some issues with no assignee already had a claim or competing work in their threads.
+- What changed: Opened the issue discussion and checked PRs before treating an issue as available.
 
 ---
 
@@ -68,10 +65,10 @@ The packet template loops through the categories. A category with finalist subse
 
 **Toolkit**
 
-- Tool:
-- What it produced:
-- Difficulties:
-- What changed:
+- Tool: Codex-assisted inspection of the GitHub issue and NomNom’s Django templates.
+- What it produced: Traced the existing category button to its Bootstrap collapse target and the events that update its label.
+- Difficulties: A top-level section without children looks like a category in the data but renders as a flat section.
+- What changed: Used the actual finalist collapse containers to define which sections the bulk controls should affect.
 
 ---
 
@@ -95,10 +92,10 @@ Source baseline inspected on macOS arm64 at [upstream commit `22d531f`](https://
 
 **Toolkit**
 
-- Tool:
-- What it produced:
-- Difficulties:
-- What changed:
+- Tool: Django admin, Docker Compose, browser inspection, and Codex-assisted setup troubleshooting.
+- What it produced: A working local baseline with two categories, individual toggles, and no bulk controls.
+- Difficulties: The checkout path contained a space, the Docker CLI helper was missing from PATH, and the admin lacked a member profile.
+- What changed: Ran the environment helper directly, corrected PATH, added the profile, and created two local categories with child sections.
 
 ---
 
@@ -122,10 +119,10 @@ The implementation stayed within the packet index template. The test setup expan
 
 **Toolkit**
 
-- Tool:
-- What it produced:
-- Difficulties:
-- What changed:
+- Tool: Codex-assisted review of the packet template and Bootstrap behavior.
+- What it produced: A plan to call Bootstrap’s show and hide methods on the existing collapse instances.
+- Difficulties: Always-visible packet downloads and unrelated collapsible elements had to retain their behavior.
+- What changed: Scoped the bulk actions to finalist containers and kept the existing per-category event listeners.
 
 ---
 
@@ -135,10 +132,10 @@ At baseline `22d531f`, source inspection found a collapse button per category an
 
 **Toolkit**
 
-- Tool:
-- What it produced:
-- Difficulties:
-- What changed:
+- Tool: Node, jsdom, Bootstrap, and the local Django app in the browser.
+- What it produced: Passing checks for mixed category state, both bulk buttons, individual toggles, labels, and aria-expanded.
+- Difficulties: The original fixture had no collapsible categories, and a synthetic test alone could not confirm what Django rendered.
+- What changed: Added test categories and repeated the checks against Django-rendered HTML and the Bootstrap bundle served by the app.
 
 ---
 
@@ -152,10 +149,10 @@ Local verification hit three setup blockers. The bootstrap script split the chec
 
 **Toolkit**
 
-- Tool:
-- What it produced:
-- Difficulties:
-- What changed:
+- Tool: Git and Codex-assisted template editing.
+- What it produced: A one-template change on a feature branch, with the tested file verified on the fork.
+- Difficulties: The checkout used for the local demo was still running the original template.
+- What changed: Started a separate local preview for the changed template so the same packet data could be compared before and after.
 
 ---
 
@@ -171,12 +168,14 @@ Local verification hit three setup blockers. The bootstrap script split the chec
 
 **Status:** Awaiting review.
 
+**AI-use disclosure:** I used OpenAI Codex to help evaluate the issue, investigate the local setup errors, implement the packet controls, run automated checks, and draft the PR description. I verified both buttons in the running app and opened the PR on GitHub.
+
 **Toolkit**
 
-- Tool:
-- What it produced:
-- Difficulties:
-- What changed:
+- Tool: GitHub’s compare page and a Codex-assisted PR draft.
+- What it produced: An open upstream PR linked to #358, with manual and automated test evidence in the description.
+- Difficulties: The connected GitHub integration could publish the branch to the fork but lacked permission to open the upstream PR.
+- What changed: I opened PR #536 through GitHub’s compare page.
 
 ---
 
