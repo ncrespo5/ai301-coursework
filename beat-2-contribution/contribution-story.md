@@ -1,4 +1,4 @@
-# Contribution: [Issue Title]
+# Contribution: Add an Allure results parser
 
 Path: `beat-2-contribution/contribution-story.md`
 
@@ -8,10 +8,9 @@ format criteria grade exactly that. Your course repo link is the whole submissio
 files and no evidence uploads are part of Assignment 5.
 
 **Contribution Number:** [1]
-**Student:** [Student name]
-**GitHub Username:** [your GitHub username, exactly as it appears on your profile - no @, no
-profile URL. Your comments upstream are identified by this name.]
-**Issue:** [GitHub issue link]
+**Student:** Nyla Crespo
+**GitHub Username:** ncrespo5
+**Issue:** https://github.com/surkuar/testledger/issues/11
 **Pull Request:** [GitHub PR link, once opened]
 
 One repository, built across units 5 to 8, telling the whole story of your real
@@ -90,6 +89,10 @@ you it held up. **Record the link to your claim comment in this section too.**
 Not claimed yet? Write `claim pending` and today's date where the link goes,
 and add the link the moment your claim lands.]
 
+**Claim:** claim pending (November 18, 2026).
+
+The direct review of TestLedger #11 passed all four required issue-selection checks. The issue lists explicit acceptance criteria and a retry fixture. It had no assignee or claim comment, and the open parser PR covered NUnit XML, a different input format. TestLedger’s contribution guide names Allure parsing as a good first contribution.
+
 **Toolkit**
 
 - Tool: issue-scout (your scout: your search strategy, your rubric),
@@ -104,19 +107,19 @@ and add the link the moment your claim lands.]
 
 **Problem Description**
 
-[In your own words, what is broken or missing?]
+TestLedger cannot import an `allure-results/` directory. Allure writes each test execution as a separate JSON file, so a single directory can contain both a failure and a subsequent pass for the same test.
 
 **Expected Behavior**
 
-[What should happen?]
+Import each directory as a run. Preserve retries across files sharing a `historyId` as separate, chronologically ordered attempts so the ledger can observe the fail-to-pass sequence.
 
 **Current Behavior**
 
-[What actually happens?]
+Local discovery in `_load_local_runs` handles JUnit XML and Cucumber JSON. The configuration has no Allure glob, and the ingestion package has no Allure parser.
 
 **Affected Components**
 
-[Which parts of the codebase are involved?]
+`src/testledger/ingest/`, `src/testledger/config.py`, and `src/testledger/cli.py` handle parsing, configuration, and local discovery. `src/testledger/models.py` defines the `TestRun` and `TestResult` records the parser must produce.
 
 **Toolkit**
 
