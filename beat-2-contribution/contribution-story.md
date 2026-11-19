@@ -10,19 +10,19 @@
 
 ## Toolkit
 
-**Unit 5: Issue-scout setup and ownership checks**
+**Unit 9: Issue-scout setup and ownership checks**
 
 November 18, 2026. The issue-scout setup carries forward the issue-selection rubric and adds searches for small Python parser and CLI work. An exploratory GitHub scan surfaced issues with no listed assignee, but their threads showed existing claims or a competing pull request. The revised search strategy prioritizes zero-comment results, and the rubric still checks the thread and open pull requests before an issue is selected. When the project shifted to frontend work, CodePath’s saved HTML/UI issue list supplied the candidates. The direct rubric review checked NomNom #358 against the issue timeline and open pull requests.
 
-**Unit 6: Repro-check and voice guide**
+**Unit 10: Repro-check and voice guide**
 
 November 18, 2026. In the PathReview sandbox, the repro-check and voice guide helped prepare the claim and reproduction comments for #55. The first evaluation matched 17 of 20 cases. The rubric was revised to accept a bounded cannot-reproduce report when it tested the same operation, captured observable output, and named the trigger it did not reach. The revised run matched 20 of 20. [Reproduction and eval notes](../beat-1-sandbox/unit-2/reproduction.md)
 
-**Unit 7: Plan-check and implementation evidence**
+**Unit 11: Plan-check and implementation evidence**
 
 November 18, 2026. The PathReview plan-check matched 18 of 20 evaluation cases. One clear plan was rejected because it stated a possible cause too confidently, which showed the value of pairing an explicitly labeled hypothesis with a trace step. The final live plan passed all seven checks after the deviations were documented, and the posted plan and branch both point back to the five failing fixtures. [Plan and branch evidence](../beat-1-sandbox/unit-3/plan-and-implement.md)
 
-**Unit 8: PR precheck and draft revision**
+**Unit 12: PR precheck and draft revision**
 
 November 18, 2026. The first live precheck of the PathReview #55 PR draft flagged a change to existing database display labels. The patch restored those labels and added a PostgreSQL assertion covering both the exact label and deduplication. The revised draft passed all five required checks and was used for PathReview PR #98. [PR and precheck evidence](../beat-1-sandbox/unit-4/pull-request.md)
 
