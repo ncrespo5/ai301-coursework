@@ -55,10 +55,9 @@ happened; these entries are the toolkit's own timeline.
 All four entries are graded. Keep every heading below, and fill each
 one in the week it belongs to.
 
-**Unit 5: [one line on the tool work]**
+**Unit 5: Issue-scout setup and ownership checks**
 
-[2-4 sentences: what you built (the scout, your strategy), what broke
-or fell short, what changed because of it.]
+November 18, 2026. The issue-scout setup carries forward the issue-selection rubric and adds searches for small Python parser and CLI work. An exploratory GitHub scan surfaced issues with no listed assignee, but their threads showed existing claims or a competing pull request. The revised search strategy prioritizes zero-comment results, and the rubric still checks the thread and open pull requests before an issue is selected.
 
 **Unit 6: [one line on the tool work]**
 
