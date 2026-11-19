@@ -1,4 +1,4 @@
-# Contribution: Add an Allure results parser
+# Contribution: Expand and collapse all packet categories
 
 Path: `beat-2-contribution/contribution-story.md`
 
@@ -10,7 +10,7 @@ files and no evidence uploads are part of Assignment 5.
 **Contribution Number:** [1]
 **Student:** Nyla Crespo
 **GitHub Username:** ncrespo5
-**Issue:** https://github.com/surkuar/testledger/issues/11
+**Issue:** https://github.com/WorldconVotingSystems/nomnom/issues/358
 **Pull Request:** [GitHub PR link, once opened]
 
 One repository, built across units 5 to 8, telling the whole story of your real
@@ -56,7 +56,7 @@ one in the week it belongs to.
 
 **Unit 5: Issue-scout setup and ownership checks**
 
-November 18, 2026. The issue-scout setup carries forward the issue-selection rubric and adds searches for small Python parser and CLI work. An exploratory GitHub scan surfaced issues with no listed assignee, but their threads showed existing claims or a competing pull request. The revised search strategy prioritizes zero-comment results, and the rubric still checks the thread and open pull requests before an issue is selected.
+November 18, 2026. The issue-scout setup carries forward the issue-selection rubric and adds searches for small Python parser and CLI work. An exploratory GitHub scan surfaced issues with no listed assignee, but their threads showed existing claims or a competing pull request. The revised search strategy prioritizes zero-comment results, and the rubric still checks the thread and open pull requests before an issue is selected. When the project shifted to frontend work, CodePath’s saved HTML/UI issue list supplied the candidates. The direct rubric review checked NomNom #358 against the issue timeline and open pull requests.
 
 **Unit 6: [one line on the tool work]**
 
@@ -91,7 +91,7 @@ and add the link the moment your claim lands.]
 
 **Claim:** claim pending (November 18, 2026).
 
-The direct review of TestLedger #11 passed all four required issue-selection checks. The issue lists explicit acceptance criteria and a retry fixture. It had no assignee or claim comment, and the open parser PR covered NUnit XML, a different input format. TestLedger’s contribution guide names Allure parsing as a good first contribution.
+NomNom #358 appeared in CodePath’s saved HTML/UI issue list. It proposes two controls on one existing page. The issue was open and unassigned, with no comments, no linked PR in its timeline, and no matching open PR in the repository. The repository is active and its developer guide describes a pull-request contribution workflow.
 
 **Toolkit**
 
@@ -107,19 +107,19 @@ The direct review of TestLedger #11 passed all four required issue-selection che
 
 **Problem Description**
 
-TestLedger cannot import an `allure-results/` directory. Allure writes each test execution as a separate JSON file, so a single directory can contain both a failure and a subsequent pass for the same test.
+Packet downloads are grouped by award category. Viewing the finalist downloads across multiple categories requires opening each category individually.
 
 **Expected Behavior**
 
-Import each directory as a run. Preserve retries across files sharing a `historyId` as separate, chronologically ordered attempts so the ledger can observe the fail-to-pass sequence.
+Page-level **Expand All** and **Collapse All** buttons should open or close all finalist download groups together. Individual category buttons should continue to work.
 
 **Current Behavior**
 
-Local discovery in `_load_local_runs` handles JUnit XML and Cucumber JSON. The configuration has no Allure glob, and the ingestion package has no Allure parser.
+The packet template loops through the categories. A category with finalist subsections gets its own Bootstrap collapse control. The page has no control for opening or closing all of those groups.
 
 **Affected Components**
 
-`src/testledger/ingest/`, `src/testledger/config.py`, and `src/testledger/cli.py` handle parsing, configuration, and local discovery. `src/testledger/models.py` defines the `TestRun` and `TestResult` records the parser must produce.
+`src/nomnom/hugopacket/templates/hugopacket/index.html` renders the page and responds to Bootstrap collapse events. `src/nomnom/hugopacket/templates/hugopacket/bits/section.html` renders each category button and its collapsible finalist group.
 
 **Toolkit**
 
@@ -134,19 +134,19 @@ Local discovery in `_load_local_runs` handles JUnit XML and Cucumber JSON. The c
 
 **Environment Setup**
 
-TestLedger 0.1.0 at [baseline commit `83776f8`](https://github.com/surkuar/testledger/commit/83776f815ed5aa618b26a411331c461e65c25e44), on macOS arm64 with Python 3.12.1 and pytest 9.2.0. Set up an isolated environment with `python3 -m venv .venv` and `.venv/bin/python -m pip install -e '.[dev]'`.
+Source baseline inspected on macOS arm64 at [upstream commit `22d531f`](https://github.com/WorldconVotingSystems/nomnom/commit/22d531f04da7748ac0daee7f5d7d8e59981d1f77). The [developer setup](https://github.com/WorldconVotingSystems/nomnom/blob/main/docs/docs/dev/bootstrap.md) uses Python 3.13, `uv`, `just`, and Docker Compose. A live browser reproduction is pending.
 
 **Steps to Reproduce**
 
-1. Put two `*-result.json` fixtures in `reports/20261118-abcdef1-attempt1/allure-results/`. Use the same `historyId` and `fullName` in both. Set the first status to `failed` and the later status to `passed`.
-2. Call `_load_local_runs(Config(), root)` with the directory containing `reports/` as `root`.
-3. Observed two input files and zero imported runs. No fail-to-pass sequence reached the ledger.
+1. Start the local application with sample packet data and open a packet containing at least two categories with finalist subsections.
+2. Use one category’s **Show all downloads** button. Check that it opens that category and leaves the others closed.
+3. Check the top of the packet page for controls to open or close all categories at once.
 
 **Reproduction Evidence**
 
-- **Commit showing reproduction:** Fork commit pending. Reproduced against upstream `83776f8`.
-- **Screenshots/logs:** `Input files: 2`, `Local runs: 0`, `Observed: []`. The unchanged full suite initially reported 46 passes and one failure in `test_custom_fix_pattern_replaces_default`. An immediate repeat reported 47 passes. The existing ingest suite separately passed all three tests. Ruff lint and format checks passed.
-- **My findings:** The fixture reaches the existing local-discovery code path, which returned no runs for the Allure directory. This is the before result for checking the importer later.
+- **Commit showing reproduction:** Fork commit pending. Source baseline is `22d531f`.
+- **Screenshots/logs:** A local template check confirmed that the category-level collapse markup is present and that the top-level template has neither an Expand All nor a Collapse All control.
+- **My findings:** The existing Bootstrap collapse groups provide a direct target for the page-wide buttons. Browser verification with seeded packet data is pending.
 
 **Toolkit**
 
