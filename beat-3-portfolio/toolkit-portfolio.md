@@ -1,118 +1,70 @@
 # Toolkit Portfolio
 
-Path: `beat-3-portfolio/toolkit-portfolio.md`
-
-This file is Assignment 6, and it is graded at the path above; a copy kept anywhere else in
-the repository is not read. It has been waiting here since you created the repo in unit 1;
-unit 9 is when you write it.
-
-**Only this page is read.** Your `tools/` folders and your installed skill folders are never
-opened, so every piece of evidence you want seen has to live inline here: an output excerpt,
-a before/after pair, a dated commit reference.
-
-**Write every sentence yourself.** AI may gather diffs, dates and excerpts for you; it does
-not draft entries.
-
-**Keep every section header below under its exact name** — Featured Tools, Inventory, The
-Arc, and Limitations and What's Next. Feature three or four tools, each in the entry shape
-shown below; give every other tool one inventory line.
-
-**Some lines below are labelled, and the label is how they are read.** Three places on this
-page use a `Label: your words` shape — the arc's beats, the tool-limits list, and nothing
-else. Keep those labels exactly as written, one per line, and never delete a labelled line:
-where you have nothing to put after a label, write `none` and move on. A deleted label reads
-as a deleted answer.
-
-**Before you finish**, replace every `[bracketed prompt]` with your own words, then delete
-the unused `[Tool name]` entry stub, its copy-me sentence, and the prompt sentences under
-each header. A leftover bracketed prompt reads as unfilled.
-
-**Student:** [Student name]
+**Student:** Nyla Crespo
 
 ## Featured Tools
 
-Three or four tools, presented in depth. Open with a few sentences
-on why you chose these.
+I chose issue-scout, repro-check, and PR precheck because each one helped at a different point in the contribution. Issue-scout helped narrow down what was worth working on. Repro-check helped me show what was actually happening, and PR precheck caught a change I wanted to fix before someone reviewed the PR. Together, they show how I went from choosing an issue to giving a reviewer evidence they could check.
 
-Full credit asks the featured set to show real change: **at least two** of your featured
-entries should show a tool that visibly moved through use. An honest entry for a tool that
-barely changed — saying so, dating what did happen, and giving the reason — earns the solid
-middle tier and never fails you.
+**issue-scout**
 
-Each tool's honest limit is not written here. It goes in the tool-limits list at the
-bottom of this page, one line per featured tool, so that the limits sit together and can be
-read as a set.
+**What it is, and the judgment hole I wrote:** Issue-scout evaluates whether an issue is a reasonable first contribution. The rubric checks whether the repo is open to contributions, whether the change is small enough to verify, and whether someone else is already working on it. An empty assignee field is only one clue. I also check the thread and pull requests for signs that someone has claimed the work.
 
-[Why these tools, in your own words.]
+**How it evolved, dated:** On November 17, 2026, the first evaluation matched 14 of 20 cases. The rubric treated recent activity as a preference, so it accepted a bounded issue in a repo with old activity and no maintainer response in the sampled threads. The revision made prolonged inactivity a reason to reject only when the available dates and the thread evidence both pointed to it. On November 18, I used CodePath’s issue list to find NomNom #358 and checked the issue thread and open PRs before claiming it.
 
-Copy the entry shape below once per featured tool and fill it there.
+**Evidence:** The evaluation improved from `14/20` to `18/20`. In `issue-02`, the verdict changed from `accept` to `reject`, matching the expected result. The scout also returned `accept` for PathReview #55 after finding a bounded change and no visible competing PR. The NomNom ownership check was manual. [Issue selection and evaluation](../beat-1-sandbox/unit-1/selection.md) · [NomNom claim](https://github.com/WorldconVotingSystems/nomnom/issues/358#issuecomment-6997163269)
 
-**[Tool name]**
+**repro-check**
 
-**What it is, and the judgment hole I wrote:** [what the tool does,
-and the part of it that is your judgment: the rubric, strategy,
-guide, manifest, or playbook you wrote.]
+**What it is, and the judgment hole I wrote:** Repro-check evaluates whether a reproduction comment gives someone enough evidence to understand and repeat the attempt. The rubric asks for the environment, the operation, and observable output. If an attempt cannot reproduce the issue, it can still be useful when it tests the same operation and names the condition it did not reach.
 
-**How it evolved, dated:** [the changes that made it yours, each
-with its date and the friction that drove it; your weekly Toolkit
-entries are the source.]
+**How it evolved, dated:** On November 18, 2026, the first run matched 17 of 20 cases. One report was rejected because it could not establish which command reached the size limit first. The report did have output from the relevant batch operation and named the missing trigger. The revised rule let that narrower, evidence-backed result pass while still requiring a positive reproduction to show the reported failure.
 
-**Evidence:** [show, don't claim: an output excerpt, a before/after
-pair, or a dated commit reference, inline here. Draw it from your real
-term work where you can - a catch this tool actually made, a
-before/after from your own repo or PR - which is graded separately from
-whether an artifact is present at all. A short, telling excerpt beats a
-pasted transcript.]
+**Evidence:** The revised evaluation matched `20/20`. In the live PathReview #55 reproduction, the original suite reported `13 passed, 5 xfailed`. Running the same cases with `--runxfail` exposed the assertions and reported `5 failed, 13 passed`. I posted the command, environment, and failing case names so someone else could repeat the run. [Reproduction and evaluation](../beat-1-sandbox/unit-2/reproduction.md) · [Posted evidence](https://github.com/codepath/pathreview-ai301-fa26-howard/issues/55#issuecomment-6975445963)
+
+**pr-precheck**
+
+**What it is, and the judgment hole I wrote:** PR precheck evaluates whether the diff follows the plan, whether the tests exercise the original problem, and whether the PR is ready for review under the repo’s standards. The reproduction-proof rule asks for a before result and a concrete after result for the same trigger. A passing test for a different case cannot establish that the reported bug was fixed.
+
+**How it evolved, dated:** On November 18, 2026, the recorded evaluation matched 20 of 20 cases. The live check of PathReview #55 exposed a problem the score alone could not show. It rejected the first draft because the patch changed existing database display labels. I kept the existing labels and strengthened the PostgreSQL fixture to check the exact label and confirm that a direct reference plus an alias produces one result. The live feedback changed the patch and its tests.
+
+**Evidence:** The live verdict changed from `reject` to `accept`, with all five required checks passing in the revised draft. Its reproduction check compared `5 failed, 13 passed` before with `18 passed` after using the same `--runxfail` run. [Precheck output and evaluation](../beat-1-sandbox/unit-4/pull-request.md) · [PathReview PR #98](https://github.com/codepath/pathreview-ai301-fa26-howard/pull/98)
 
 ## Inventory
 
-One line each for the rest of the toolkit: what it is and where it
-stands (one bullet per tool; a compact sentence or two is fine).
-
-- [Tool name: one line.]
+- **plan-check** checks whether a proposed fix follows the reproduction, stays in scope, identifies unknowns, and has a test plan. It matched 18 of 20 evaluation cases. The final live plan for PathReview #55 passed all seven required checks. [Plan and evaluation](../beat-1-sandbox/unit-3/plan-and-implement.md)
 
 ## The Arc
 
-The story of the toolkit in order: friction, change, result, dated.
-Your weekly Toolkit entries are the source; read your own record and
-tell it oldest first.
+**Beat 1**\
+Date: November 17, 2026\
+Friction: Issue-scout accepted a small issue in a repo whose activity and maintainer responses were both stale.\
+Change: Made prolonged inactivity a required check when both the repo history and the thread evidence support it.\
+Result: Agreement rose from 14/20 to 18/20, and the inactive-repo case changed to the expected rejection.
 
-Write one block per beat, in the shape below, oldest first. Keep all four labels on every
-beat, each on its own line. The `Result:` line is what the beat was for: it says what
-happened *after* the change, which is not the same sentence as the change itself. If a beat
-never reached a result, write `Result: none` — an honest beat that did not land still counts
-fully as a beat.
+**Beat 2**\
+Date: November 18, 2026\
+Friction: Repro-check rejected a report with useful output because the reporter could not confirm the exact trigger.\
+Change: Allowed a bounded cannot-reproduce report when it shows the same operation, records the result, and names the untested condition.\
+Result: The revised rubric accepted that report and agreement rose from 17/20 to 20/20.
 
-Full credit asks for **at least two** beats whose `Result:` line names something that
-actually happened afterwards. A beat about something that did not work counts fully as a
-beat, and when the work happened never moves this score.
+**Beat 3**\
+Date: November 18, 2026\
+Friction: Plan-check rejected a viable sample plan because it treated a hypothesis about the cause as an established fact.\
+Change: For the live PathReview plan, kept the suspected cause explicit and included a step to trace each failing fixture before changing the detector.\
+Result: The posted live plan passed all seven required checks, and the focused parser suite passed all 18 tests after the patch.
 
-**Beat 1**
-Date: [a date, or a month and year]
-Friction: [what was going wrong, and how you noticed]
-Change: [what you changed because of it]
-Result: [what happened afterwards, or the word none]
-
-**Beat 2**
-Date: [a date, or a month and year]
-Friction: [what was going wrong, and how you noticed]
-Change: [what you changed because of it]
-Result: [what happened afterwards, or the word none]
-
-Copy the beat shape above for as many beats as your term had.
+**Beat 4**\
+Date: November 18, 2026\
+Friction: PR precheck caught a display-label regression outside the intended parser fix.\
+Change: Preserved the existing labels and added a test for the exact PostgreSQL label and deduplication.\
+Result: The revised draft passed all five checks and became PathReview PR #98.
 
 ## Limitations and What's Next
 
-What the toolkit as a whole still does not do, and what you would
-build or change next. Write this section last; it will be better
-after the rest.
+These tools depend on the evidence they receive. A clear reproduction comment can still miss the original environment, and a passing precheck only covers the code and output it reviewed. I would add a final check that ties each before-and-after result to the commit and command that produced it. I would also test the issue-scout rubric on a few quiet repos that still accept contributions to see how often the inactivity rule rules them out.
 
-[The honest limits, and what comes next, in your own sentences.]
-
-**Tool limits.** One line per featured tool, in the same order as the entries above, naming
-where that tool still stops or what it still gets wrong. A small honest limit is full credit;
-"none really" is not a limit. If a tool genuinely has none you can name, write `none` after
-its label rather than deleting the line.
-
-issue-scout: [where this tool still stops, in plain words, or the word none]
-[tool name]: [where this tool still stops, in plain words, or the word none]
+**Tool limits.**\
+issue-scout: An inactive-looking repo may still welcome a patch. A teammate may also have claimed an issue in a thread or PR that the initial search missed.\
+repro-check: A well-documented cannot-reproduce attempt leaves the original trigger unresolved until someone can recreate it.\
+pr-precheck: A passing local review cannot tell me how hosted CI or maintainers will respond once the PR is opened.
