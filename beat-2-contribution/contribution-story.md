@@ -11,7 +11,7 @@ files and no evidence uploads are part of Assignment 5.
 **Student:** Nyla Crespo
 **GitHub Username:** ncrespo5
 **Issue:** https://github.com/WorldconVotingSystems/nomnom/issues/358
-**Pull Request:** [GitHub PR link, once opened]
+**Pull Request:** https://github.com/WorldconVotingSystems/nomnom/pull/536
 
 One repository, built across units 5 to 8, telling the whole story of your real
 contribution. Fill it as you work, not at the end — the sections below ask for evidence that
@@ -134,7 +134,7 @@ The packet template loops through the categories. A category with finalist subse
 
 **Environment Setup**
 
-Source baseline inspected on macOS arm64 at [upstream commit `22d531f`](https://github.com/WorldconVotingSystems/nomnom/commit/22d531f04da7748ac0daee7f5d7d8e59981d1f77). The [developer setup](https://github.com/WorldconVotingSystems/nomnom/blob/main/docs/docs/dev/bootstrap.md) uses Python 3.13, `uv`, `just`, and Docker Compose. A live browser reproduction is pending.
+Source baseline inspected on macOS arm64 at [upstream commit `22d531f`](https://github.com/WorldconVotingSystems/nomnom/commit/22d531f04da7748ac0daee7f5d7d8e59981d1f77). The [developer setup](https://github.com/WorldconVotingSystems/nomnom/blob/main/docs/docs/dev/bootstrap.md) uses Python 3.13, `uv`, `just`, and Docker Compose. The development server ran on port 8000. The local Yugo Awards election was set to Voting Preview, and the seeded admin account was given a local member profile so the packet page would load.
 
 **Steps to Reproduce**
 
@@ -144,9 +144,9 @@ Source baseline inspected on macOS arm64 at [upstream commit `22d531f`](https://
 
 **Reproduction Evidence**
 
-- **Commit showing reproduction:** Fork commit pending. Source baseline is `22d531f`.
-- **Screenshots/logs:** A local template check confirmed that the category-level collapse markup is present and that the top-level template has neither an Expand All nor a Collapse All control.
-- **My findings:** The existing Bootstrap collapse groups provide a direct target for the page-wide buttons. Browser verification with seeded packet data is pending.
+- **Commit showing reproduction:** [Fork baseline `22d531f`](https://github.com/ncrespo5/nomnom/commit/22d531f04da7748ac0daee7f5d7d8e59981d1f77).
+- **Screenshots/logs:** The local baseline packet returned HTTP 200 with Test Category A and Test Category B, each with one sample finalist. The rendered page had individual category buttons and no bulk controls.
+- **My findings:** The bulk controls can use the same Bootstrap collapse groups as the individual buttons.
 
 **Toolkit**
 
@@ -187,7 +187,7 @@ why. A recorded deviation is honest work; silent drift is not.]
 
 ## Testing Strategy
 
-At baseline `22d531f`, source inspection found a collapse button per category and no page-level controls. A local Node and jsdom fixture loaded the changed template’s actual script and Bootstrap 5.3.3. With two categories, it verified **Expand All** from a mixed state, **Collapse All**, individual toggles, and synchronization of button labels and `aria-expanded`. An unrelated collapse stayed open, and the bulk controls stayed hidden when categories or Bootstrap were absent. The full Django stack with seeded packet data and the repository test suite are pending.
+At baseline `22d531f`, source inspection found a collapse button per category and no page-level controls. A local Node and jsdom fixture loaded the changed template’s actual script and Bootstrap 5.3.3. With two categories, it verified **Expand All** from a mixed state, **Collapse All**, individual toggles, and synchronization of button labels and `aria-expanded`. An unrelated collapse stayed open, and the bulk controls stayed hidden when categories or Bootstrap were absent. The fix was also checked on the page rendered by the local Django app, using the Bootstrap bundle served by that app. The browser check confirmed that both finalists appeared with **Expand All** and hid with **Collapse All**. The full repository test suite has not been run.
 
 **Toolkit**
 
@@ -205,7 +205,7 @@ built, decisions you made when you made them, wrong turns included.]
 
 **November 18, 2026**
 
-Claimed NomNom #358 in its GitHub thread. The local branch `fix/358-packet-category-controls` contains the one-template change in commit `507fdd3`. The fixture confirmed that each category’s existing Bootstrap events still update its individual button. The branch is local and a pull request is pending.
+Claimed NomNom #358 in its GitHub thread. The local branch `fix/358-packet-category-controls` contains the one-template change in commit `507fdd3`. The fixture confirmed that each category’s existing Bootstrap events still update its individual button. The tested template was published to the fork in commit [`b0cb8e6`](https://github.com/ncrespo5/nomnom/commit/b0cb8e68deb582bd3923381265ee4591e0a943c5). The PR targets NomNom’s `main` branch.
 
 **Toolkit**
 
@@ -218,20 +218,15 @@ Claimed NomNom #358 in its GitHub thread. The local branch `fix/358-packet-categ
 
 ## Pull Request
 
-**PR Link:** [GitHub PR URL when opened]
+**PR Link:** https://github.com/WorldconVotingSystems/nomnom/pull/536
 
-**PR Description:** [what the PR says; much of the content above
-adapts into it]
+**PR Description:** The PR adds **Expand All** and **Collapse All** to the packet page and keeps the individual category buttons in sync. It links issue #358 and records the local Django browser check and automated checks.
 
 **Maintainer Feedback:**
 
-- [Date]: [feedback received, or "none yet"; silence is a normal
-  state and costs you nothing]
-- [Date]: [how you addressed it]
+- November 18, 2026: None yet.
 
-**Status:** [Awaiting review / Iterating / Merged / Closed. The
-status is a fact you record, never a grade: the PR is graded as
-opened.]
+**Status:** Awaiting review.
 
 **Toolkit**
 
